@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - SkillSwap</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Manrope', sans-serif;
+        }
+
+        :root {
+            --primary-blue: #1e90ff;
+            --light-blue: #87cefa;
+            --dark-text: #2c3e50;
+            --light-gray: #f0f0f0;
+        }
+
+        body {
+            background: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: var(--dark-text);
+            padding: 0;
+        }
+
+        .contact-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 120px); /* Adjust for navbar and footer */
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .contact-container {
+            display: flex;
+            max-width: 1200px;
+            width: 100%;
+
+            border-radius: 12px;
+        
+            overflow: hidden;
+        }
+
+        .contact-form {
+            flex: 1;
+            padding: 40px;
+            max-width: 500px;
+        }
+
+        h1 {
+            color: var(--primary-blue);
+            text-align: left;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #34495e;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            background: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            background: #fff;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            background: var(--primary-blue);
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #1e70c9;
+        }
+
+        .contact-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+        }
+
+        .contact-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-blue) !important;
+        }
+
+        .navbar-brand i {
+            margin-right: 8px;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--dark-text) !important;
+            font-weight: 500;
+            margin: 0 15px;
+            position: relative;
+            transition: color 0.3s ease;
+            padding-bottom: 2px;
+            line-height: 1.2;
+        }
+
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #0069ab;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #0069ab !important;
+        }
+
+        .navbar-nav .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .btn-signup-corner {
+            background: linear-gradient(100deg, #b6e6ff 0%, #0095DE 100%);
+            color: white;
+            padding: 10px 32px;
+            border-radius: 12px;
+            border: none;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 0 15px rgba(182, 230, 255, 0.6);
+            transition: all 0.3s ease, transform 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-signup-corner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(182, 230, 255, 0.3);
+            opacity: 0;
+            transition: all 0.5s ease;
+            transform: rotate(45deg);
+            pointer-events: none;
+        }
+
+        .btn-signup-corner:hover::before {
+            opacity: 1;
+            top: -25%;
+            left: -25%;
+        }
+
+        .btn-signup-corner:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 0 25px #b6e6ff, 0 6px 20px rgba(0, 164, 244, 0.4);
+            background: linear-gradient(90deg, #81D4FA 0%, #00a4f4 100%);
+            color: white !important;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: linear-gradient(135deg, #f8fdff 0%, #eff9ff 100%);
+            color: var(--dark-text);
+            padding: 60px 0 30px;
+            position: relative;
+            overflow: hidden;
+            margin-top: auto;
+        }
+
+        .footer-brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: var(--primary-blue) !important;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .footer-logo {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 5px;
+        }
+
+        .footer-description {
+            color: #5a6c7d;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            font-weight: 400;
+            max-width: 300px;
+        }
+
+        .footer-title {
+            color: var(--primary-blue) !important;
+            font-weight: 700;
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #5a6c7d;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+            display: inline-block;
+            padding: 5px 0;
+        }
+
+        .footer-links a:hover {
+            color: #000000;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(79, 195, 247, 0.3);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(79, 195, 247, 0.4);
+        }
+
+        .footer-bottom {
+            border-top: 2px solid #b6e6ff;
+            margin-top: 40px;
+            padding-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .copyright-text {
+            color: #5a6c7d;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .decorative-dots {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background-image: radial-gradient(var(--primary-blue) 2px, transparent 2px);
+            background-size: 25px 25px;
+            opacity: 0.2;
+            z-index: 1;
+        }
+
+        .dots-1 {
+            top: 80px;
+            left: 30px;
+        }
+
+        .dots-2 {
+            bottom: 80px;
+            right: 80px;
+        }
+
+        /* Responsive Adjustments */
+        @media (min-width: 768px) {
+            .navbar-collapse {
+                justify-content: flex-end !important;
+            }
+
+            .navbar-nav {
+                margin-right: 20px;
+            }
+
+            .btn-signup-corner {
+                margin-left: 0;
+            }
+
+            .contact-container {
+                flex-direction: row;
+            }
+
+            .contact-image {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .navbar-collapse {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 10px 0;
+            }
+
+            .navbar-nav {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-bottom: 10px;
+            }
+
+            .navbar-nav .nav-item {
+                margin: 5px 0;
+            }
+
+            .navbar-nav .nav-link {
+                padding: 10px 0;
+            }
+
+            .btn-signup-corner {
+                margin: 10px 0;
+                align-self: flex-start;
+            }
+
+            .contact-wrapper {
+                padding: 10px;
+            }
+
+            .contact-container {
+                flex-direction: column;
+                margin: 20px 0;
+            }
+
+            .contact-form {
+                padding: 20px;
+            }
+
+            .contact-image {
+                display: none;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                padding: 40px 0 20px;
+            }
+
+            .footer-brand {
+                font-size: 1.5rem;
+                align-items: center;
+                margin-bottom: 25px;
+            }
+
+            .footer-description {
+                text-align: center;
+                max-width: 100%;
+                margin-bottom: 35px;
+            }
+
+            .footer-title {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .footer-links {
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+                margin-top: 20px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .contact-form {
+                padding: 15px;
+            }
+
+            .footer {
+                padding: 30px 0 15px;
+            }
+
+            .col-lg-2, .col-md-4 {
+                margin-bottom: 30px;
+            }
+
+            .footer-title {
+                font-size: 1.1rem;
+                margin-bottom: 15px;
+            }
+
+            .footer-links li {
+                margin-bottom: 8px;
+            }
+
+            .social-links a {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/home.html">
+                <img src="/public/logo.png" alt="SkillSwap Logo" width="30" height="30" class="d-inline-block align-text-top">
+                SkillSwap
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="/home.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/browse.html">Browse</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/teach.html">Teach</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/aboutus.html">About us</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/contactus.html">Contact us</a></li>
+                </ul>
+                <a class="nav-link" href="/signin.html">
+                    <button class="btn btn-signup-corner">SIGNUP</button>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contact Section -->
+    <div class="contact-wrapper">
+        <div class="contact-container">
+            <div class="contact-form">
+                <h1>Contact Us</h1>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="Type your message here"></textarea>
+                    </div>
+                    <button type="submit">Send message</button>
+                </form>
+            </div>
+            <div class="contact-image">
+                <img src="/public/sample.png" alt="Contact Support">
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-brand">
+                        <img src="/public/logo.png" alt="SkillSwap Logo" class="footer-logo">
+                        <span>SkillSwap</span>
+                    </div>
+                    <p class="footer-description">
+                        Experience personalized learning and skill development from the comfort of your home. Connect with experts, share knowledge, and grow together in our vibrant community.
+                    </p>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="footer-title">Support</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Getting Started</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Help Articles</a></li>
+                        <li><a href="#">Report an Issue</a></li>
+                        <li><a href="#">Contact Help Desk</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Services</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Interactive Learning</a></li>
+                        <li><a href="#">Online Education</a></li>
+                        <li><a href="#">Virtual Classes</a></li>
+                        <li><a href="#">Downloadable PDFs</a></li>
+                        <li><a href="#">Community Tips</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Legal</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Notice</a></li>
+                        <li><a href="#">Cookie Preferences</a></li>
+                        <li><a href="#">Trust Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+                <p class="copyright-text">&copy; SkillSwap 2025. All Rights Reserved</p>
+            </div>
+        </div>
+        <div class="decorative-dots dots-1"></div>
+        <div class="decorative-dots dots-2"></div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="/firebase-config.js"></script>
+    <script src="/ui-auth.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script src="/emailjs-config.js"></script>
+    <script>
+        (function(){
+            if (window.emailjs && !emailjs.__initialized) {
+                emailjs.init(window.EMAILJS_PUBLIC_KEY || '');
+                emailjs.__initialized = true;
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                var form = document.querySelector('.contact-form form');
+                if (!form) return;
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    var name = document.getElementById('name').value.trim();
+                    var email = document.getElementById('email').value.trim();
+                    var message = document.getElementById('message').value.trim();
+
+                    if (!name || !email || !message) {
+                        alert('Please fill out all fields.');
+                        return;
+                    }
+
+                    var serviceID = window.EMAILJS_SERVICE_ID || '';
+                    var templateID = window.EMAILJS_TEMPLATE_ID || '';
+
+                    emailjs.send(serviceID, templateID, {
+                        from_name: name,
+                        from_email: email,
+                        message: message
+                    }).then(function() {
+                        alert('Message sent successfully!');
+                        form.reset();
+                    }).catch(function(err) {
+                        console.error(err);
+                        alert('Failed to send message: ' + (err && err.text ? err.text : 'Unknown error'));
+                    });
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSwap</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex: 1;
+            min-height: 0;
+            width: 100%;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #fff;
+            padding: 20px 0;
+            border-right: 1px solid #eee;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            flex-shrink: 0;
+        }
+
+        .sidebar .nav-link {
+            color: #333;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-radius: 8px;
+            margin: 5px 0;
+        }
+
+        .sidebar .nav-link.active,
+        .sidebar .nav-link:hover {
+            background: #e9f2ff;
+            color: #0099ff;
+        }
+
+        .teach-btn {
+            background: #0099ff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        .teach-btn:hover {
+            background: #0077cc;
+        }
+
+        .main {
+            flex: 1;
+            padding: 30px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .welcome {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .welcome span {
+            background: linear-gradient(90deg, #1F6F96 0%, #94D7F8 100%);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .profile-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .profile-box button {
+            background: #ddd;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .profile-box button:hover {
+            background: #ccc;
+        }
+
+        .card {
+            background: #fff;
+            border: none;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .card img {
+            border-radius: 8px 8px 0 0;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .suggested {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .suggested .row {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 10px 0;
+            margin: 0;
+        }
+
+        .suggested .col-md-3 {
+            flex: 0 0 auto;
+            width: 280px;
+            min-width: 280px;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #f8fdff 0%, #eff9ff 100%);
+            padding: 40px 20px;
+            color: #2C3E50;
+            margin-top: auto;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        .footer-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4FC3F7;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: #5a6c7d;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #0077cc;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #4FC3F7, #81D4FA);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(79, 195, 247, 0.4);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #e0e0e0;
+            margin-top: 30px;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copyright-text {
+            color: #5a6c7d;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .content-wrapper {
+                flex-direction: column;
+            }
+            .profile-box {
+                flex-direction: column;
+                text-align: center;
+            }
+            .profile-img {
+                width: 100%;
+                height: auto;
+            }
+            .suggested .col-md-3 {
+                width: 250px;
+                min-width: 250px;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper">
+        <div class="sidebar">
+            <div class="text-center mb-4">
+                <img src="/public/pp.png" alt="Profile Picture" class="rounded-circle mx-auto" style="width: 60px; height: 60px;">
+                <p class="mt-2" id="sidebar-username">Sophia</p>
+            </div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="/home.html"><i class="fas fa-home"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Match.html"><i class="fas fa-users"></i> Matches</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Messages.html"><i class="fas fa-envelope"></i> Messages</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/Dashboard.html"><i class="fas fa-user-circle"></i> Profile</a>
+                </li>
+            </ul>
+            <div class="px-3 mt-4">
+                <button class="teach-btn">Teach a Skill</button>
+            </div>
+        </div>
+        <div class="main">
+            <div class="welcome"><span>Welcome back</span>, <span id="welcome-username">Sophia</span></div>
+            <div class="profile-box">
+                <div>
+                    <strong id="profile-name">Sophia Bennett</strong>
+                    <div class="profile-info" id="profile-skills">Teaching: Photography, Learning: Spanish</div>
+                    <button class="btn btn-outline-secondary">Find Matches</button>
+                </div>
+                <img src="/public/pp.png" alt="Profile Picture" class="profile-img">
+            </div>
+            <div class="suggested">
+                <h4 class="mb-3">Suggested for you</h4>
+                <div class="row g-3">
+                    <div class="col-md-3 col-6">
+                        <div class="card">
+                            <img src="/public/Ethan Carter1.png" alt="Ethan Carter" class="card-img-top">
+                            <div class="card-body">
+                                <strong>Ethan Carter</strong>
+                                <p class="card-text">Learning: Photography<br>Teaching: French</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="card">
+                            <img src="/public/Olivia Harper1.png" alt="Olivia Harper" class="card-img-top">
+                            <div class="card-body">
+                                <strong>Olivia Harper</strong>
+                                <p class="card-text">Learning: Spanish<br>Teaching: Graphic Design</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="card">
+                            <img src="/public/Liam Walker1.png" alt="Liam Walker" class="card-img-top">
+                            <div class="card-body">
+                                <strong>Liam Walker</strong>
+                                <p class="card-text">Learning: Photography<br>Teaching: Cooking</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="card">
+                            <img src="/public/Ava Bennett1.png" alt="Ava Bennett" class="card-img-top">
+                            <div class="card-body">
+                                <strong>Ava Bennett</strong>
+                                <p class="card-text">Learning: Spanish<br>Teaching: Yoga</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-brand">
+                        <img src="/public/logo.png" alt="SkillSwap Logo" class="footer-logo">
+                        <span>SkillSwap</span>
+                    </div>
+                    <p class="footer-description">
+                        Experience personalized learning through skill exchange in our vibrant community.
+                    </p>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="footer-title">Support</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Getting Started</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Help Articles</a></li>
+                        <li><a href="#">Report an Issue</a></li>
+                        <li><a href="#">Contact Help Desk</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Services</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Interactive Learning</a></li>
+                        <li><a href="#">Online Education</a></li>
+                        <li><a href="#">Virtual Classes</a></li>
+                        <li><a href="#">Downloadable PDFs</a></li>
+                        <li><a href="#">Community Tips</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Legal</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Notice</a></li>
+                        <li><a href="#">Cookie Preferences</a></li>
+                        <li><a href="#">Trust Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="social-links">
+                    <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+                <p class="copyright-text">&copy; SkillSwap 2025. All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="/firebase-config.js"></script>
+    <script src="/ui-auth.js"></script>
+    <script>
+        // Update dashboard with user profile data
+        document.addEventListener('DOMContentLoaded', function() {
+            function updateDashboardWithUserData() {
+                try {
+                    var currentUser = localStorage.getItem('currentUser');
+                    if (currentUser) {
+                        var userProfile = JSON.parse(currentUser);
+                        var username = userProfile.username || userProfile.email || 'User';
+                        
+                        // Update sidebar username
+                        var sidebarUsername = document.getElementById('sidebar-username');
+                        if (sidebarUsername) {
+                            sidebarUsername.textContent = username;
+                        }
+                        
+                        // Update welcome message
+                        var welcomeUsername = document.getElementById('welcome-username');
+                        if (welcomeUsername) {
+                            welcomeUsername.textContent = username;
+                        }
+                        
+                        // Update profile name
+                        var profileName = document.getElementById('profile-name');
+                        if (profileName) {
+                            profileName.textContent = username;
+                        }
+                        
+                        // Update profile skills if available
+                        var profileSkills = document.getElementById('profile-skills');
+                        if (profileSkills && userProfile.teachSkill && userProfile.learnSkill) {
+                            profileSkills.textContent = 'Teaching: ' + userProfile.teachSkill + ', Learning: ' + userProfile.learnSkill;
+                        }
+                    }
+                } catch (e) {
+                    console.warn('Error updating dashboard with user data:', e);
+                }
+            }
+            
+            // Update immediately
+            updateDashboardWithUserData();
+            
+            // Also update when Firebase auth state changes
+            if (window.firebaseAuth) {
+                firebaseAuth.onAuthStateChanged(function(user) {
+                    if (user) {
+                        updateDashboardWithUserData();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
