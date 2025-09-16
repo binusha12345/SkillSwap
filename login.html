@@ -221,7 +221,7 @@ body {
     border-radius: 8px;
     outline: none;
     background-color: var(--light-gray);
-    color: #cecece;
+    color: #2c2c2c;
     font-size: 14px;
     transition: box-shadow 0.3s ease;
 }
@@ -240,7 +240,7 @@ body {
 }
 
 .remember-section a.forgot-password {
-    color: #6B7280;
+    color: #000000;
     text-decoration: none;
     font-weight: 500;
 }
@@ -503,8 +503,8 @@ body {
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="/home.html">
-                <img src="/public/logo.png" alt="SkillSwap Logo" width="30" height="30" class="d-inline-block align-text-top">
+            <a class="navbar-brand" href="home.html">
+                <img src="./public/logo.png" alt="SkillSwap Logo" width="30" height="30" class="d-inline-block align-text-top">
                 SkillSwap
             </a>
 
@@ -515,13 +515,13 @@ body {
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="/home.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/browse.html">Browse</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/teach.html">Teach</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/aboutus.html">About us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/contactus.html">Contact us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="browse.html">Browse</a></li>
+                    <li class="nav-item"><a class="nav-link" href="teach.html">Teach</a></li>
+                    <li class="nav-item"><a class="nav-link" href="aboutus.html">About us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contactus.html">Contact us</a></li>
                 </ul>
-                <a class="nav-link" href="/signin.html">
+                <a class="nav-link" href="signin.html">
                     <button class="btn btn-signup-corner">SIGNUP</button></a>
             </div>
         </div>
@@ -535,17 +535,23 @@ body {
                     <label>Email</label>
                     <input type="email" class="input-field" placeholder="Enter email" required>
                 </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" class="input-field" placeholder="Enter password" required>
-                </div>
+<div class="form-group">
+  <label for="password">Password</label>
+  <input type="password" id="password" class="input-field" placeholder="Enter password" required>
+
+  <div class="form-check mt-2">
+    <input type="checkbox" class="form-check-input" id="showPassword" onclick="myFunction()">
+    <label class="form-check-label" for="showPassword">Show Password</label>
+  </div>
+</div>
+
                 <div class="remember-section">
                     <label><input type="checkbox"> Remember me</label>
                     <a href="#" class="forgot-password">Forgot password?</a>
                 </div>
                 <button type="submit" class="login-btn">Login</button>
                 <div class="footer-text">
-                    Don’t have an account? <a href="/signin.html">Sign up</a>
+                    Don’t have an account? <a href="signin.html">Sign up</a>
                 </div>
             </form>
         </div>
@@ -557,7 +563,7 @@ body {
             <div class="row">
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="footer-brand">
-                        <img src="/public/logo.png" alt="SkillSwap Logo" class="footer-logo">
+                        <img src="./public/logo.png" alt="SkillSwap Logo" class="footer-logo">
                         <span>SkillSwap</span>
                     </div>
                     <p class="footer-description">
@@ -607,7 +613,16 @@ body {
             </div>
         </div>
     </footer>
-
+<script>
+  function myFunction() {
+    const passwordField = document.getElementById("password");
+    if (passwordField.type === "password") {
+      passwordField.type = "text";
+    } else {
+      passwordField.type = "password";
+    }
+  }
+</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
